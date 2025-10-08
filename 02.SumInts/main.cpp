@@ -55,7 +55,7 @@ void reverseText(const std::string& text){
     std::stack<std::string> s;
     while(pos < text.length()){
         std::string temp = getWord(text,pos);
-        if(!temp.empty())
+        if(! temp.empty())
         s.push(temp);
     }
     while(!s.empty()){
