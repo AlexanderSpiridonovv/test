@@ -82,9 +82,17 @@ class SimpleBST{
         std::cout<<root->value<< ' ';
         inorder(root->right);
     }
+    void deleteTree(Node* node){
+        if(!node) return;
+        deleteTree(node->left);
+        deleteTree(node->right);
+        delete node;
+    }
 public:
     SimpleBST() : root(nullptr){}
     SimpleBST(Node* ptr) : root(ptr){}
+    ~SimpleBST(){ deleteTree(root); }
+    
     void insert(int val){
         root = insertHelper(root,val);
         std::cout<<std::endl;
@@ -101,10 +109,7 @@ void sortOddNums(std::vector<int>& nums){
     }
     sort(temp.begin(), temp.end());
     nums = temp;
-    for(int x:nums)
-        std::cout<<x << ' ';
 }
 int main(){
-    std::vector<int> nums = {7,8,3,1,9,4};
-    sortOddNums(nums);
+    
 }
