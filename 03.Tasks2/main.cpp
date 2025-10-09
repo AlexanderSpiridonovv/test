@@ -6,7 +6,7 @@
 #include <algorithm>
 
 //task 1
-bool isValidSymbol(const char c){
+bool isValidSymbol(const char& c){
     return c != ' ' 
         && c != ',' 
         && c != '.' 
@@ -14,7 +14,7 @@ bool isValidSymbol(const char c){
         && c != '\t' 
         && c != '\0';
 }
-void wordCounter(const std::string text){
+void wordCounter(const std::string& text){
     std::unordered_map<std::string, int> mp;
     for(int i = 0; i < text.length(); i++){
         if(!isValidSymbol(text[i]))continue;
@@ -116,5 +116,5 @@ void sortOddNums(std::vector<int>& nums){
     nums = temp;
 }
 int main(){
-    wordCounter("too poy pt pot pt    . \n pt ");
+    wordCounter("pot rr rr      rr \n top  pot . top");
 }
