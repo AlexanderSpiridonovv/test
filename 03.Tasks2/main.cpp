@@ -37,13 +37,13 @@ public:
 class Leopard : public Animal{
 public:
     void speed()const override{
-        std::cout<<"Leopard runs at 60km/h";
+        std::cout<<"Leopard runs at 60km/h"<< std::endl;
     }
 };
 class Turtle : public Animal{
 public:
     void speed()const override{
-        std::cout<<"Turtle runs at 2km/h";
+        std::cout<<"Turtle runs at 2km/h"<< std::endl;
     }
 };
 
@@ -92,7 +92,7 @@ public:
     SimpleBST() : root(nullptr){}
     SimpleBST(Node* ptr) : root(ptr){}
     ~SimpleBST(){ deleteTree(root); }
-    
+
     void insert(int val){
         root = insertHelper(root,val);
         std::cout<<std::endl;
