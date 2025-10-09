@@ -7,7 +7,12 @@
 
 //task 1
 bool isValidSymbol(const char c){
-    return c != ' ' && c != ',' && c != '.' && c != '\0';
+    return c != ' ' 
+        && c != ',' 
+        && c != '.' 
+        && c != '\n' 
+        && c != '\t' 
+        && c != '\0';
 }
 void wordCounter(const std::string text){
     std::unordered_map<std::string, int> mp;
@@ -111,5 +116,5 @@ void sortOddNums(std::vector<int>& nums){
     nums = temp;
 }
 int main(){
-    
+    wordCounter("too poy pt pot pt    . \n pt ");
 }
