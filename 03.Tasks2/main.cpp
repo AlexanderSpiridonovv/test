@@ -113,8 +113,8 @@ void sortOddNums(std::vector<int>& nums){
             temp.push_back(x);
     }
     sort(temp.begin(), temp.end());
-    nums = temp;
+    nums = std::move(temp);
 }
 int main(){
-    wordCounter("pot rr rr      rr \n top  pot . top");
+    
 }
