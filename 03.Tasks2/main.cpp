@@ -4,7 +4,20 @@
 #include <numeric>
 #include <unordered_map>
 #include <algorithm>
+#include <sstream>
 
+std::vector<std::string> ReverseText(const std::string& text)
+{
+    std::istringstream iss(text);
+    std::vector<std::string> v;
+    std::string word;
+    
+    while(iss >> word) {
+        v.push_back(word);
+    }
+    std::reverse(v.begin(),v.end());
+    return v;
+}
 //task 1
 bool isValidSymbol(const char& c){
     return c != ' ' 
@@ -32,25 +45,6 @@ void wordCounter(const std::string& text){
         std::cout << it->first << " : "<<it->second <<std::endl;
     }
 }
-
-//task2
-class Animal{
-public:
-    virtual void speed()const = 0;
-    virtual ~Animal() = default;
-};
-class Leopard : public Animal{
-public:
-    void speed()const override{
-        std::cout<<"Leopard runs at 60km/h"<< std::endl;
-    }
-};
-class Turtle : public Animal{
-public:
-    void speed()const override{
-        std::cout<<"Turtle runs at 2km/h"<< std::endl;
-    }
-};
 
 //task3
 /*
@@ -115,6 +109,23 @@ void sortOddNums(std::vector<int>& nums){
     sort(temp.begin(), temp.end());
     nums = std::move(temp);
 }
-int main(){
-    
+
+void SortOddNums(std::vector<int>& nums){
+    auto newEnd = std::remove_if(nums.begin(), nums.end(), 
+    [](int x) { return x % 2 == 0; });
+
+    nums.erase(newEnd, nums.end());
+
+    std::sort(nums.begin(), nums.end());
 }
+
+int main(int argc, const char** argv) 
+{
+    return 0;
+}
+
+// int main(){
+//     std::vector<int> v = {5,6,1,7,11,1,3};
+//     SortOddNums(v);
+//     for(int x : v) std::cout<<x << ' ';
+// }
