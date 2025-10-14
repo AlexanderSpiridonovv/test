@@ -88,6 +88,10 @@ public:
 template <typename T>
 T getMax(const T* arr, const size_t size)
 {
+    if(size == 1)
+    {
+        return arr[0];
+    }
     T max_element = arr[0];
     for(size_t i = 1; i < size; i++)
     {
