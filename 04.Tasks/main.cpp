@@ -52,6 +52,29 @@ bool ValidPerentecies(const std::string& str){
     }
     return true;
 }
+
+bool ValidPerentheses(const std::string& str){
+    std::stack<char> s;
+    for(char c : str){
+        if(c == '{' || c == '[' || c == '(')
+        {
+            s.push(c);
+        }
+        else
+        {
+            char top = s.top();
+            s.pop();
+            if(s.empty())
+            {
+                return false;
+            }
+            if (c == '}' && top != '{') return false;
+            if (c == ']' && top != '[') return false;
+            if (c == ')' && top != '(') return false;
+        }
+    }
+    return s.empty();
+}
 //task 2
 //ne vidqh smisul da pravq header i cpp za tolkova maluk obekt
 class Person {
