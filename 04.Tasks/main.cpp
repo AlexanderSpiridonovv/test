@@ -105,7 +105,7 @@ T getMax(const T* arr, const size_t size)
 
 int main(int argc, const char** argv) 
 {
-    std::cout<<ValidPerentecies("{[]()()}")<<std::endl;
+    std::cout<<ValidPerentecies("(((")<<std::endl;
 
     auto p1 = std::make_shared<Person>("Ivan", 69);
     std::cout << "Count: " << p1.use_count() << '\n';  // 1
