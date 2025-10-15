@@ -7,18 +7,19 @@
 #include <sstream>
 #include <memory>
 //task 1
-bool IsClosingPerentecie(const char& c)
+auto IsClosingPerentecie(const char& c) -> bool
 {
     return c == '}' || c == ']' || c == ')';
 }
-bool AreMatching(const char& opening, const char& closing)
+auto AreMatching(const char& opening, const char& closing) -> bool
 {
     return opening == '{' && closing == '}' 
         || opening == '[' && closing == ']'
         || opening == '(' && closing == ')';
 }
 
-bool ValidPerentecies(const std::string& str){
+auto ValidPerentecies(const std::string& str) -> bool
+{
     if(str.length() == 0)
     {
         return true;
@@ -53,7 +54,8 @@ bool ValidPerentecies(const std::string& str){
     return true;
 }
 
-bool ValidPerentheses(const std::string& str){
+auto ValidPerentheses(const std::string& str) -> bool
+{
     std::stack<char> s;
     for(char c : str){
         if(c == '{' || c == '[' || c == '(')
@@ -98,18 +100,18 @@ public:
         std::cout << "Name: " << m_name << ", Age: " << m_age << '\n';
     }
     
-    std::string GetName() const 
+    auto GetName() const -> std::string
     { 
         return m_name;
     }
-    int GetAge() const 
+    auto GetAge() const -> int
     { 
         return m_age;
     }
 };
 //task 3
 template <typename T>
-T getMax(const T* arr, const size_t size)
+auto getMax(const T* arr, const size_t size) -> T
 {
     if(size == 1)
     {
