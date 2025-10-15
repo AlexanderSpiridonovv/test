@@ -24,7 +24,7 @@ auto ValidPerentecies(const std::string& str) -> bool
     {
         return true;
     }
-    if(IsClosingPerentecie(str[0]))
+    if(str.length() == 1)
     {
         return false;
     }
