@@ -5,6 +5,9 @@
 #include <unordered_map>
 #include <algorithm>
 #include <sstream>
+#include "Animal.h"
+#include "Leopard.h"
+#include "Turtle.h"
 
 std::vector<std::string> ReverseText(const std::string& text)
 {
@@ -119,8 +122,46 @@ void SortOddNums(std::vector<int>& nums){
     std::sort(nums.begin(), nums.end());
 }
 
-int main(int argc, const char** argv) 
+int main() 
 {
+    Leopard leo("Simba", 100);
+    Turtle turtle("Franklin", 5);
+    Leopard leo2("Leo", 80);
+    
+    // Print info
+    std::cout << "Leopard: " << leo.GetName() << " - " << leo.GetSpeed() << " km/h\n";
+    std::cout << "Turtle: " << turtle.GetName() << " - " << turtle.GetSpeed() << " km/h\n\n";
+    
+    // Race over 100 km
+    std::cout << "Race over 100 km:\n";
+    leo.Print(100);
+    turtle.Print(100);
+    
+    // Change speeds
+    leo.SetSpeed(120);
+    turtle.SetSpeed(8);
+    
+    std::cout << "\nAfter speed change:\n";
+    leo.Print(100);
+    turtle.Print(100);
+    
+    // Test invalid speed
+    try {
+        leo.SetSpeed(150);
+    } catch(std::invalid_argument& e) {
+        std::cout << "\nError: " << e.what() << '\n';
+    }
+     std::cout << "\n=== Polymorphism with Pointers ===\n\n";
+    
+    std::vector<Animal*> zoo;
+    zoo.push_back(&leo);
+    zoo.push_back(&turtle);
+    zoo.push_back(&leo2);
+
+    std::cout << "All animals traveling 200 km:\n";
+    for(Animal* animal : zoo) {
+        animal->Print(200);
+    }
     return 0;
 }
 

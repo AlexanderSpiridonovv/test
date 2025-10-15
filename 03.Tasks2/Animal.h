@@ -14,6 +14,7 @@ protected:
     double m_speed;
     AnimalType m_type;
     void _setType(AnimalType type);
+    static void _printTypeHelper(AnimalType type);
     virtual void _printType() const = 0;
 public:
     Animal();

@@ -14,10 +14,12 @@ Leopard::Leopard(const std::string& name, const double speed)
     SetName(name);
     SetSpeed(speed);
 }
+
 void Leopard::_printType() const
 {
-    std::cout<<"Leopard";
+    std::cout << "Leopard";
 }
+
 void Leopard::SetSpeed(const double speed)
 {
     if(speed < 0 || speed > 120)

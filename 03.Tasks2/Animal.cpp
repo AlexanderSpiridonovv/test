@@ -6,6 +6,7 @@ void Animal::_setType(AnimalType type)
 {
     m_type = type;
 }
+
 Animal::Animal()
 {
     _setType(AnimalType::Undefined);
@@ -31,7 +32,7 @@ auto Animal::GetTimeForDistance(const double distance) const -> double
 void Animal::Print(const double distance) const{
     _printType();
     std::cout<< " | " 
-    << GetName()
+    << GetName() << " | "
     << GetSpeed() << " km/h | " 
-    << GetTimeForDistance(distance) << " h"; 
+    << GetTimeForDistance(distance) << " h \n"; 
 }
