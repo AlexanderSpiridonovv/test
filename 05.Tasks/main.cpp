@@ -20,8 +20,9 @@ void InputAndPrintMatrix(size_t n, size_t m)
     {
         for(size_t j = 0; j < m; j++)
         {
-            std::cout << matrix[i][j];
+            std::cout << matrix[i][j] << ' ';
         }
+        std::cout << std::endl;
     }
     
 }
