@@ -70,15 +70,18 @@ auto SumEachRow(const std::vector<std::vector<T>>& matrix) -> std::vector<T>
 template<typename T>
 auto SumEachCol(const std::vector<std::vector<T>>& matrix) -> std::vector<T>
 {
-    if(matrix.empty() || matrix[0].empty()) {
+    if(matrix.empty() || matrix[0].empty()) 
+    {
         return {};
     }
     
     size_t numCols = matrix[0].size();
     std::vector<T> sums(numCols, T());
     
-    for(const auto& row : matrix) {
-        for(size_t col = 0; col < row.size(); col++) {
+    for(const auto& row : matrix) 
+    {
+        for(size_t col = 0; col < row.size(); col++) 
+        {
             sums[col] += row[col];
         }
     }
@@ -87,9 +90,11 @@ auto SumEachCol(const std::vector<std::vector<T>>& matrix) -> std::vector<T>
 }
 
 template<typename T>
-void PrintVector(const std::vector<T>& vec, const std::string& title) {
+void PrintVector(const std::vector<T>& vec, const std::string& title) 
+{
     std::cout << title << " : [ ";
-    for(const auto& val : vec) {
+    for(const auto& val : vec) 
+    {
         std::cout << val << " ";
     }
     std::cout << "]\n\n";
