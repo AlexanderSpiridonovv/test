@@ -14,6 +14,7 @@ enum class Symbol
     WILD,
     SCATTER
 };
+
 inline std::string symbolToString(Symbol s)
 {
     switch (s)
@@ -31,6 +32,7 @@ inline std::string symbolToString(Symbol s)
         default:                  return "UNKNOWN";
     }
 }
+
 inline std::string symbolToStringForSlot(Symbol s)
 {
     switch (s)

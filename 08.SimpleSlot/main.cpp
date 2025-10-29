@@ -20,6 +20,7 @@ void ClearInputBuffer() {
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
+
 int main() {
     Slot slot;
     Player player(0, slot);
@@ -31,11 +32,13 @@ int main() {
     string choice;
     bool running = true;
     
-    while (running) {
+    while (running) 
+    {
         DisplayMenu();
         cin >> choice;
         
-        if (choice == "1") {
+        if (choice == "1") 
+        {
             cout << "\nEnter credit amount: ";
             int deposit;
             cin >> deposit;
@@ -48,7 +51,8 @@ int main() {
                 cout << "\n✅ Successfully deposited " << deposit << " credits.\n";
             }
         }
-        else if (choice == "p" || choice == "P") {
+        else if (choice == "p" || choice == "P") 
+        {
             try {
                 cout << "\n";
                 cout << "\n";
@@ -58,10 +62,12 @@ int main() {
                 cout << "\n❌ " << e.what() << "\n";
             }
         }
-        else if (choice == "i" || choice == "I") {
+        else if (choice == "i" || choice == "I") 
+        {
             player.DisplayInfo();
         }
-        else if (choice == "3") {
+        else if (choice == "3") 
+        {
             try {
                 player.CashOut();
                 running = false;
@@ -71,7 +77,8 @@ int main() {
                 cout << "\n❌ " << e.what() << "\n";
             }
         }
-        else {
+        else 
+        {
             cout << "\n❌ Invalid choice! Please try again.\n";
             break;
         }

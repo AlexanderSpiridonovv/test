@@ -49,6 +49,7 @@ void Slot::_printMatrix()const
         std::cout << std::endl << std::endl;
     }
 }
+
 auto Slot::_getNormalSymbolKeyByLine(const std::vector<int>& line)const -> std::pair<Symbol,int>
 {
     Symbol symbol = m_slot[line[0]][0];
@@ -91,6 +92,7 @@ auto Slot::_getNormalSymbolKeyByLine(const std::vector<int>& line)const -> std::
         return {symbol,count};
     }
 }
+
 auto Slot::_getConsecutiveWildsByLine(const std::vector<int>& line)const -> int
 {
     int count = 0;
@@ -100,11 +102,13 @@ auto Slot::_getConsecutiveWildsByLine(const std::vector<int>& line)const -> int
     }
     return count;
 }
+
 auto Slot::_getWildKeyByLine(const std::vector<int>& line)const -> std::pair<Symbol,int>
 {
     int count = _getConsecutiveWildsByLine(line);
     return {Symbol::WILD,count};
 }
+
 auto Slot::_getWinnigsAmount(const std::pair<Symbol,int>& win)const -> int
 {
     auto it = PayoutTable.find(win);
@@ -114,6 +118,7 @@ auto Slot::_getWinnigsAmount(const std::pair<Symbol,int>& win)const -> int
     }
     return it -> second;
 }
+
 void Slot::_printWinnigsHelper(const std::pair<Symbol,int>& win)const
 {
     int currentWin = _getWinnigsAmount(win);
@@ -129,6 +134,7 @@ void Slot::_printWinnigsHelper(const std::pair<Symbol,int>& win)const
     }
     std::cout << "= " << currentWin << std::endl;
 }
+
 auto Slot::_getWinnigsFromLine(const std::vector<int>& line)const -> int
 {
     auto normalPair =  _getNormalSymbolKeyByLine(line);
@@ -140,6 +146,7 @@ auto Slot::_getWinnigsFromLine(const std::vector<int>& line)const -> int
     
     return normalWin + wildWin;
 }
+
 void Slot::_printWinnigsFromLine(const std::vector<int>& line)const
 {
     auto normalPair =  _getNormalSymbolKeyByLine(line);
@@ -154,6 +161,7 @@ auto Slot::_getScatterWinAmount()const -> int
 {
     return _getWinnigsAmount({Symbol::SCATTER,scatterCount});
 }
+
 auto Slot::GetTotalWinnings()const -> int
 {
     int totalWin = 0;
@@ -166,6 +174,7 @@ auto Slot::GetTotalWinnings()const -> int
 
     return totalWin;
 }
+
 void Slot::_printAllWinnings()const
 {
     int totalWin = GetTotalWinnings();
@@ -180,8 +189,8 @@ void Slot::_printAllWinnings()const
 
     _printWinnigsHelper({Symbol::SCATTER,scatterCount});
     std::cout << "\nTotal win: " << totalWin << std::endl;
-
 }
+
 void Slot::Play()
 {
     _populateSlot();

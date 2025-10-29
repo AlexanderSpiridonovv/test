@@ -8,7 +8,8 @@ const int Reels = 5;
 const int Rows = 3;
 const int SymbolCount = 10;
 
-class Slot{
+class Slot
+{
 public:
     auto GetTotalWinnings() const -> int;
     void Play();

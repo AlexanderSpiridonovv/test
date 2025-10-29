@@ -236,6 +236,22 @@ void PrintChessboard(size_t n)
         }
     }
 }
+bool checkInclusion(std::string s1, std::string s2) {
+        int l = 0;
+        int r = s2.length() - 1;
+        sort(s2.begin(),s2.end());
+        int n = s2.length();
+        while(r < s1.length())
+        {
+            std::string temp = s1.substr (l, n);
+            sort(temp.begin(), temp.end());
+            std::cout << temp << std::endl;
+            if(s2 == temp) return true;
+            l++;
+            r++;
+        }
+        return false;
+    }
 int main(int argc, const char** argv) 
 {
     std::vector<std::vector<int>> matrix1 = {
@@ -244,5 +260,6 @@ int main(int argc, const char** argv)
         {7, 8, 9}
     };
     PrintChessboard(7);
+    std::cout<<checkInclusion("eidbaooo","ab");
 
 }

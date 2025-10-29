@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <algorithm>
 #include <sstream>
+#include<utility>
 #include "Animal.h"
 #include "Leopard.h"
 #include "Turtle.h"
@@ -121,10 +122,24 @@ void SortOddNums(std::vector<int>& nums){
 
     std::sort(nums.begin(), nums.end());
 }
-
+std::vector<std::vector<int>> findWinners(std::vector<std::vector<int>>& matches) {
+        std::unordered_map<int, std::pair<int,int>> m;
+        for(int i = 0; i < matches.size(); i++){
+            m[matches[i][0]].first++;
+            m[matches[i][1]].second++;
+        }
+        std::vector<std::vector<int>> res;
+        for(auto it : m){
+            if(it.second.first >= 1 && it.second.second == 0)
+                res[0].push_back(it.first);
+            else if(it.second.first >= 0 && it.second.second == 1)
+                res[1].push_back(it.first);
+        }
+        return res;
+    }
 int main() 
 {
-    Leopard leo("Simba", 100);
+   /* Leopard leo("Simba", 100);
     Turtle turtle("Franklin", 5);
     Leopard leo2("Leo", 80);
     
@@ -161,6 +176,13 @@ int main()
     std::cout << "All animals traveling 200 km:\n";
     for(Animal* animal : zoo) {
         animal->Print(200);
+    }*/
+    std::vector<std::vector<int>> v1 = {{1,3},{1,4}};
+    std::vector<std::vector<int>> v = findWinners(v1);
+    for(std::vector<int> x : v){
+        for(int n : x){
+            std::cout<< n <<' ';
+        }
     }
     return 0;
 }
