@@ -3,7 +3,8 @@
 
 using namespace std;
 
-void DisplayMenu() {
+void DisplayMenu() 
+{
     cout << "\n╔════════════════════════════════╗\n";
     cout << "║      🎰 SLOT MACHINE 🎰        ║\n";
     cout << "╚════════════════════════════════╝\n";
@@ -16,12 +17,14 @@ void DisplayMenu() {
     cout << "Your choice: ";
 }
 
-void ClearInputBuffer() {
+void ClearInputBuffer() 
+{
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
 
-int main() {
+int main()
+{
     Slot slot;
     Player player(0, slot);
     
