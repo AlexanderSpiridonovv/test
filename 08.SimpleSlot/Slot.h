@@ -19,6 +19,7 @@ private:
     
     auto _generateSymbol() const -> Symbol;
     void _populateSlot();
+    void _loopHelper(int &idx,const std::vector<int>& line, const Symbol& symbol)const;
     
     auto _getNormalSymbolKeyByLine(const std::vector<int>& line) const -> std::pair<Symbol,int>;
     auto _getWildKeyByLine(const std::vector<int>& line) const -> std::pair<Symbol,int>;

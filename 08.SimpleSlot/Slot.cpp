@@ -5,6 +5,8 @@
 #include <random>
 #include <utility>
 
+const int INVALID_KEY = -1;
+
 auto Slot::_generateSymbol()const -> Symbol
 {
     static std::mt19937 rng(std::random_device{}());
@@ -50,57 +52,50 @@ void Slot::_printMatrix()const
     }
 }
 
+void Slot::_loopHelper(int &idx, const std::vector<int>& line, const Symbol& symbol) const
+{
+    while(idx < Reels && 
+         (m_slot[line[idx]][idx] == symbol || 
+          m_slot[line[idx]][idx] == Symbol::WILD))
+    {
+        idx++;
+    }
+}
+
 auto Slot::_getNormalSymbolKeyByLine(const std::vector<int>& line)const -> std::pair<Symbol,int>
 {
     Symbol symbol = m_slot[line[0]][0];
     //scatter win logic is handled separately
     if(symbol == Symbol::SCATTER)
     {
-        return {Symbol::SCATTER,0};
+        return {Symbol::SCATTER, INVALID_KEY};
     }
     //for non pure wild wins starting with wild
-    if(symbol == Symbol::WILD)
+    int wildCount = _getConsecutiveWildsByLine(line);
+
+    if(wildCount >= Reels)
     {
-        int wildCount = _getConsecutiveWildsByLine(line);
-        if(wildCount < Reels)
-        {
-            int count = wildCount;
-            Symbol base = m_slot[line[count]][count];
-            if(base == Symbol::SCATTER)
-            {
-                return {Symbol::SCATTER,0};
-            }
-            while(count < Reels && 
-                 (m_slot[line[count]][count] == base || 
-                  m_slot[line[count]][count] == Symbol::WILD))
-            {
-                count++;
-            }
-            return {base,count};
-        }
-        return {symbol,0};
+        return {symbol, INVALID_KEY};
     }
-    else
+
+    int index = wildCount;
+    Symbol normalSymbol = m_slot[line[index]][index];
+
+    if(normalSymbol == Symbol::SCATTER)
     {
-       int count = 1;
-       while(count < Reels && 
-            (m_slot[line[count]][count] == symbol || 
-             m_slot[line[count]][count] == Symbol::WILD))
-        {
-            count++;
-        }
-        return {symbol,count};
+        return {Symbol::SCATTER, INVALID_KEY};
     }
+
+    _loopHelper(index,line,normalSymbol);
+
+    return {normalSymbol,index};
 }
 
 auto Slot::_getConsecutiveWildsByLine(const std::vector<int>& line)const -> int
 {
-    int count = 0;
-    while(count < Reels && m_slot[line[count]][count] == Symbol::WILD) 
-    {
-        count++;
-    }
-    return count;
+    int index = 0;
+    _loopHelper(index,line,Symbol::WILD);
+    return index;
 }
 
 auto Slot::_getWildKeyByLine(const std::vector<int>& line)const -> std::pair<Symbol,int>

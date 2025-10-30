@@ -14,7 +14,6 @@ enum class Symbol
     WILD,
     SCATTER
 };
-
 inline std::string symbolToString(Symbol s)
 {
     switch (s)
