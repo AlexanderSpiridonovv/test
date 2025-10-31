@@ -82,7 +82,7 @@ auto Slot::_getNormalSymbolKeyByLine(const std::vector<int>& line)const -> std::
 
     int index = wildCount;
     Symbol normalSymbol = m_slot[line[index]][index];
-    
+
     if(normalSymbol == Symbol::SCATTER)
     {
         return {Symbol::SCATTER, INVALID_KEY};
@@ -143,6 +143,7 @@ void Slot::_printWinnigsHelper(int i, const std::pair<Symbol,int>& win)const
     {
         return;
     }
+
     std::cout << "L" << i << "  -->  ";
     for(int i = 0; i < win.second; i++)
     {
@@ -156,7 +157,6 @@ auto Slot::_getWinnigsFromLine(const std::vector<int>& line)const -> int
 {
     const auto& normalPair =  _getNormalSymbolKeyByLine(line);
     const auto& wildPair = _getWildKeyByLine(line);
-    
     
     int normalWin = _getWinnigsAmount(normalPair);
     int wildWin = _getWinnigsAmount(wildPair);

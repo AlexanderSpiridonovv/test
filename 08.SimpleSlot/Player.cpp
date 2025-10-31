@@ -5,10 +5,12 @@ Player::Player(unsigned balance, Slot& slot)
     m_balance = balance;
     m_slot = std::make_unique<Slot>(slot);
 }
+
 void Player::Deposit(unsigned deposit)
 {
     m_balance += deposit;
 }
+
 void Player::Play()
 {
     if(m_slot == nullptr)
@@ -23,10 +25,12 @@ void Player::Play()
     m_slot -> Play();
     m_balance += m_slot -> GetTotalWinnings();
 }
+
 void Player::DisplayInfo()const
 {
     std::cout << "Current credits: " << m_balance << std::endl;
 }
+
 void Player::CashOut()
 {
     std::cout << "Total out: " << m_balance << std::endl; 
