@@ -15,7 +15,7 @@ public:
     void Play();
 private:
     Symbol m_slot [Rows][Reels];
-    int scatterCount = 0;
+    int m_scatterCount = 0;
     
     auto _generateSymbol() const -> Symbol;
     void _populateSlot();
