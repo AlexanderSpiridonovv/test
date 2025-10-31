@@ -52,7 +52,7 @@ void Slot::_printMatrix()const
     }
 }
 
-void Slot::_loopHelper(int &idx, const std::vector<int>& line, const Symbol& symbol) const
+auto Slot::_loopHelper(int idx, const std::vector<int>& line, const Symbol& symbol) const -> int
 {
     while(idx < Reels && 
          (m_slot[line[idx]][idx] == symbol || 
@@ -60,13 +60,14 @@ void Slot::_loopHelper(int &idx, const std::vector<int>& line, const Symbol& sym
     {
         idx++;
     }
+    return idx;
 }
 
 auto Slot::_getNormalSymbolKeyByLine(const std::vector<int>& line)const -> std::pair<Symbol,int>
 {
-    Symbol symbol = m_slot[line[0]][0];
+    Symbol initialSymbol = m_slot[line[0]][0];
     //scatter win logic is handled separately
-    if(symbol == Symbol::SCATTER)
+    if(initialSymbol == Symbol::SCATTER)
     {
         return {Symbol::SCATTER, INVALID_KEY};
     }
@@ -75,7 +76,7 @@ auto Slot::_getNormalSymbolKeyByLine(const std::vector<int>& line)const -> std::
 
     if(wildCount >= Reels)
     {
-        return {symbol, INVALID_KEY};
+        return {initialSymbol, INVALID_KEY};
     }
 
     int index = wildCount;
@@ -85,9 +86,9 @@ auto Slot::_getNormalSymbolKeyByLine(const std::vector<int>& line)const -> std::
         return {Symbol::SCATTER, INVALID_KEY};
     }
 
-    _loopHelper(index,line,normalSymbol);
+    int count = _loopHelper(index,line,normalSymbol);
 
-    int count = index;
+    //int count = index;
     if(count >= 3)
     {
         return {normalSymbol,count};
@@ -97,9 +98,7 @@ auto Slot::_getNormalSymbolKeyByLine(const std::vector<int>& line)const -> std::
 
 auto Slot::_getConsecutiveWildsByLine(const std::vector<int>& line)const -> int
 {
-    int index = 0;
-    _loopHelper(index,line,Symbol::WILD);
-    return index;
+    return _loopHelper(0 ,line,Symbol::WILD);
 }
 
 auto Slot::_getWildKeyByLine(const std::vector<int>& line)const -> std::pair<Symbol,int>
