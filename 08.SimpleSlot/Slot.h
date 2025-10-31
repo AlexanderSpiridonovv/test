@@ -19,8 +19,8 @@ private:
     
     auto _generateSymbol() const -> Symbol;
     void _populateSlot();
-    auto _loopHelper(int idx,const std::vector<int>& line, const Symbol& symbol)const -> int;
     
+    auto _loopHelper(int idx, const std::vector<int>& line, const Symbol& symbol)const -> int;
     auto _getNormalSymbolKeyByLine(const std::vector<int>& line) const -> std::pair<Symbol,int>;
     auto _getWildKeyByLine(const std::vector<int>& line) const -> std::pair<Symbol,int>;
     auto _getConsecutiveWildsByLine(const std::vector<int>& line) const -> int;
@@ -30,6 +30,7 @@ private:
     
     void _printMatrix()const;
     void _printWinnigsHelper(const std::pair<Symbol,int>& win) const;
-    void _printWinnigsFromLine(const std::vector<int>& line) const;
+    void _printWinnigsHelper(int N, const std::pair<Symbol,int>& win) const;
+    void _printWinnigsFromLineN(int N, const std::vector<int>& line) const;
     void _printAllWinnings() const;
 };

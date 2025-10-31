@@ -74,6 +74,7 @@ auto Slot::_getNormalSymbolKeyByLine(const std::vector<int>& line)const -> std::
     //for non pure wild wins starting with wild
     int wildCount = _getConsecutiveWildsByLine(line);
 
+    //All Wilds
     if(wildCount >= Reels)
     {
         return {initialSymbol, INVALID_KEY};
@@ -81,6 +82,7 @@ auto Slot::_getNormalSymbolKeyByLine(const std::vector<int>& line)const -> std::
 
     int index = wildCount;
     Symbol normalSymbol = m_slot[line[index]][index];
+    
     if(normalSymbol == Symbol::SCATTER)
     {
         return {Symbol::SCATTER, INVALID_KEY};
@@ -88,7 +90,6 @@ auto Slot::_getNormalSymbolKeyByLine(const std::vector<int>& line)const -> std::
 
     int count = _loopHelper(index,line,normalSymbol);
 
-    //int count = index;
     if(count >= 3)
     {
         return {normalSymbol,count};
@@ -98,13 +99,13 @@ auto Slot::_getNormalSymbolKeyByLine(const std::vector<int>& line)const -> std::
 
 auto Slot::_getConsecutiveWildsByLine(const std::vector<int>& line)const -> int
 {
-    return _loopHelper(0 ,line,Symbol::WILD);
+    return _loopHelper(0, line, Symbol::WILD);
 }
 
 auto Slot::_getWildKeyByLine(const std::vector<int>& line)const -> std::pair<Symbol,int>
 {
     int count = _getConsecutiveWildsByLine(line);
-    return {Symbol::WILD,count};
+    return {Symbol::WILD, count};
 }
 
 auto Slot::_getWinnigsAmount(const std::pair<Symbol,int>& win)const -> int
@@ -134,6 +135,23 @@ void Slot::_printWinnigsHelper(const std::pair<Symbol,int>& win)const
     std::cout << "= " << currentWin << std::endl;
 }
 
+void Slot::_printWinnigsHelper(int i, const std::pair<Symbol,int>& win)const
+{
+    int currentWin = _getWinnigsAmount(win);
+
+    if(currentWin == 0)
+    {
+        return;
+    }
+    std::cout << "L" << i << "  -->  ";
+    for(int i = 0; i < win.second; i++)
+    {
+        //predefined operator <<
+        std::cout << win.first << ' ';
+    }
+    std::cout << "= " << currentWin << std::endl;
+}
+
 auto Slot::_getWinnigsFromLine(const std::vector<int>& line)const -> int
 {
     const auto& normalPair =  _getNormalSymbolKeyByLine(line);
@@ -146,13 +164,13 @@ auto Slot::_getWinnigsFromLine(const std::vector<int>& line)const -> int
     return normalWin + wildWin;
 }
 
-void Slot::_printWinnigsFromLine(const std::vector<int>& line)const
+void Slot::_printWinnigsFromLineN(int N, const std::vector<int>& line)const
 {
     const auto& normalPair =  _getNormalSymbolKeyByLine(line);
     const auto& wildPair = _getWildKeyByLine(line);
-
-    _printWinnigsHelper(normalPair);
-    _printWinnigsHelper(wildPair);
+ 
+    _printWinnigsHelper(N, normalPair);
+    _printWinnigsHelper(N, wildPair);
 }
 
 auto Slot::_getScatterWinAmount()const -> int
@@ -181,15 +199,10 @@ void Slot::_printAllWinnings()const
        return;
     }
 
-    //FIND BETTER WAY FOR PRINTING LINE
     int i = 1;
     for(const auto& line : lines)
     {
-        if(_getWinnigsFromLine(line) > 0)
-        {
-            std::cout << "L" << i << "  -->  ";
-            _printWinnigsFromLine(line);
-        }
+        _printWinnigsFromLineN(i, line);
         i++;
     }
 
